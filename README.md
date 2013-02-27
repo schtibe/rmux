@@ -127,10 +127,20 @@ Host *
 Create directory ~/.ssh/cm if you use this path
 
 These settings will keep a master connection to the server open. You can close it
+(I never do):
 
 ````
 ssh user@host -O exit
 ````
+
+But when your notebook was sleeping and the TCP conenctions died it will take some time to recover.
+I usually don't want to wait and do:
+
+````
+killall ssh
+````
+
+Since you notebook just woke up, you shouldn't kill anything alive.
 
 Example for rmux-\<id\> directory
 ---------------------------------
