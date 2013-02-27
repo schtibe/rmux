@@ -1,0 +1,4 @@
+tmux.conf merge=ours
+vimrc merge=ours
+bashrc merge=ours
+vim merge=ours
