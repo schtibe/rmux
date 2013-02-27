@@ -118,7 +118,7 @@ drwxr-xr-x  5 ganwell  staff   170B Feb 27 21:40 bin
 -rwxr-xr-x  1 ganwell  staff    79B Feb 27 21:29 rmuxid
 drwxr-xr-x  7 ganwell  staff   238B Feb 27 21:35 templates
 -rwxr-xr-x  1 ganwell  staff   1.5M Feb 27 21:23 tmux-bin
-lrwxr-xr-x  1 ganwell  staff    25B Feb 27 21:44 tmux-conf -> /Users/ganwell/.tmux.conf
+lrwxr-xr-x  1 ganwell  staff    25B Feb 27 21:44 tmux.conf -> /Users/ganwell/.tmux.conf
 -rwxr-xr-x  1 ganwell  staff   542B Feb 27 21:23 tmux-start
 lrwxr-xr-x  1 ganwell  staff    19B Feb 27 21:44 vim -> /Users/ganwell/.vim
 lrwxr-xr-x  1 ganwell  staff    21B Feb 27 21:44 vimrc -> /Users/ganwell/.vimrc
