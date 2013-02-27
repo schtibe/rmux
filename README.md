@@ -98,3 +98,26 @@ Host *
 	ServerAliveInterval 600
 
 Create directory ~/.ssh/cm if you use this path
+
+Example for rmux-\<id\> directory
+---------------------------------
+
+````bash
+$> ls -lh
+total 3192
+-rw-r--r--  1 ganwell  staff    44B Feb 27 21:23 README
+-rw-r--r--  1 ganwell  staff   2.4K Feb 27 21:40 README.md
+-rw-------  1 ganwell  staff   984B Feb 27 21:44 bash_history
+-rwxr-xr-x  1 ganwell  staff   1.2K Feb 27 21:24 bashrc
+drwxr-xr-x  5 ganwell  staff   170B Feb 27 21:40 bin
+-rwxr-xr-x  1 ganwell  staff   978B Feb 27 21:23 init
+-rwxr-xr-x  1 ganwell  staff    41B Feb 27 21:23 init-templates.sh
+-rw-r--r--  1 ganwell  staff   984B Feb 27 21:44 my_history
+-rwxr-xr-x  1 ganwell  staff    79B Feb 27 21:29 rmuxid
+drwxr-xr-x  7 ganwell  staff   238B Feb 27 21:35 templates
+-rwxr-xr-x  1 ganwell  staff   1.5M Feb 27 21:23 tmux-bin
+lrwxr-xr-x  1 ganwell  staff    25B Feb 27 21:44 tmux-conf -> /Users/ganwell/.tmux.conf
+-rwxr-xr-x  1 ganwell  staff   542B Feb 27 21:23 tmux-start
+lrwxr-xr-x  1 ganwell  staff    19B Feb 27 21:44 vim -> /Users/ganwell/.vim
+lrwxr-xr-x  1 ganwell  staff    21B Feb 27 21:44 vimrc -> /Users/ganwell/.vimrc
+````
