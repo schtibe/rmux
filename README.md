@@ -1,19 +1,23 @@
 rmux
 ====
 
-Portable configs using rsync. This is a template, but I try to reshape it to a form that allows 
-to easily merge changes from upstream. You can add any other config-files or even binaries.
-It was originally built for tmux and vim configs and assumes you're using pathogen.
+Portable configs using rsync. It was originally built for tmux and vim configs and assumes you're using pathogen.
+Minimal dependencies are:
 
-All portable file are stored in ~/.rmux-\<id\>.
+* bash
+* rsync
+
+It assumes that you connect to some kind of unix. And has fixes for few quirks in solaris.
+
+All portable files are stored in ~/.rmux-\<id\>.
 
 Commands:
 
 rmux user@remotehost
-	Take local ~/.rmux-\<id\> to remote host and setup vim and tmux
+* Take local ~/.rmux-\<id\> to remote host and setup vim and tmux
 
 imux user@remotehost
-	Install fallback tmux if you cannot install it on the host
+* Install fallback tmux if you cannot install it on the host
 
 
 Installation
@@ -32,21 +36,20 @@ cd ~/.rmux-<id>
 
 * Edit README and add your name and email address
 * Edit rmuxid and set the id to the previous chosen \<id\>
+* Add the ~/.rmux-\<id\>/bin directory to your $PATH
+* Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 * Copy or link your ~/.tmux.conf contents to ~/.rmux-\<id\>/tmux.conf
 * Copy or link your ~/.bashrc contents to ~/.rmux-\<id\>/bashrc
 * Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
 * Copy or link your ~/.vim directory to ~/.rmux-\<id\>/vim
-* Add the ~/.rmux-\<id\>/bin directory to your $PATH
-* Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 
 Bash History
--------
+------------
 
-The template bashrc shares the bash history across sessions and cleans the
+The template bashrc shares the bash history across bash-sessions and cleans the
 history to contain only unique lines. User ctrl-r to access the history.
 
-Remove the section in the bashrc if you
-don't want this feature.
+Remove the section in the bashrc if you don't want this feature.
 
 vimrc
 -----
@@ -62,7 +65,7 @@ let &rtp .= expand(",$HOME/.rmux-$RMUXID/vim,$HOME/.rmux-$RMUDID/vim/after")
 vim python path
 ---------------
 
-An example of adding a python path to bundle libraries:
+An example of adding a python path to bundle libraries in rmux:
 
 ````vimrc
 let $PYTHONPATH .= expand(":$HOME/.rmux-$RMUXID/jedi")
