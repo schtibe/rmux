@@ -20,7 +20,7 @@ Installation
 ------------
 
 Think of an unique id for yourself, a nick name or something. It should
-NOT conflict with other users on the target systems. We call id \<id\>
+NOT conflict with other users on the target systems. We call id \<id\>.
 
 
 ````bash
@@ -41,6 +41,13 @@ cd ~/.rmux-<id>
 
 See ganwells settings as an example:
 https://github.com/ganwell/rmux/tree/ganwells_settings
+
+History
+-------
+
+The template bashrc shares the bash history across sessions and cleans the
+history to contain only unique lines. Remove the section in the bashrc if you
+don't want this feature.
 
 vimrc
 -----
@@ -80,12 +87,11 @@ Add this line to ~/.rmux-\<id\>/bashrc
 source "$RMUXDIR/git-prompt.sh"
 ````
 
-
 SSH Settings
 ------------
 
-You are free to use another ControlPath or even not use ControlMaster. But its
-not recommended.
+You are free to use another ControlPath or even not use ControlMaster. But it is
+highly recommended to use the setting below.
 
 Host *
 	Compression yes
