@@ -17,7 +17,7 @@ All portable files are stored in ~/.rmux-\<id\>.
 
 Local commands:
 
-rmux user@remotehost <arguments passed to ssh>
+rmux user@remotehost \<arguments passed to ssh\>
 * Take local ~/.rmux-\<id\> to remote host and setup vim and tmux
 
 imux user@remotehost
