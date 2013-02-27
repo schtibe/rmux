@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( dirname $( dirname $(cd ${0%/*} && echo $PWD/${0##*/}) ) )"
+source $SCRIPT_DIR/rmuxid
+TMUXCONF="$RMUXDIR/tmux.conf"
+
+if [ "$1" == "attach" ]; then
+	if [ -e "$HOME/.rmux/attach"  ]; then
+		"$HOME/.rmux/attach"
+	fi
+fi
+
+if [ -e "$RMUXDIR/tmux-bin" ]; then
+	"$RMUXDIR/tmux-bin" -f "$TMUXCONF" "$@"
+else
+	if [ -e /opt/csw/bin/tmux ]; then
+		/opt/csw/bin/tmux -f "$TMUXCONF" "$@"
+	else
+		tmux -f "$TMUXCONF" "$@"
+	fi
+fi
+
+if [ "$1" == "attach" ]; then
+	if [ -e "$HOME/.rmux/detach"  ]; then
+		"$HOME/.rmux/detach"
+	fi
+fi
+
+
+

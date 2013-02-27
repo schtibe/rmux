@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Connect to remote host and take your tmux.conf and vimrc to the host
+#
+# Connect:
+#    rmux $HOST
+# Run tmux:
+#    tmux ...
+# Run vim:
+#    vi ...
+# Attach tmux session:
+#    tmuc [id] ...
+# Attach first session:
+#    tmuk
+
+SCRIPT_DIR="$( dirname $( dirname $(cd ${0%/*} && echo $PWD/${0##*/}) ) )"
+source $SCRIPT_DIR/../rmuxid
+
+HOST="$1"
+shift
+
+if [[ ! "$HOST" == *@* ]]; then
+	HOST="$USER@$HOST"
+fi
+
+if [ ! -S "$HOME/.ssh/cm/$HOST:22.conn" ]; then
+	echo Connection setup
+	ssh -X -A "$HOST" "uname -a; who"
+	# uses existing connection
+	rsync -r --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git --exclude="*.pyc" "$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/"
+fi
+
+ssh "$@" "$HOST" -t "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"

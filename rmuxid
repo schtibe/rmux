@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+export RMUXID=ganwell
+export RMUXDIR="$HOME/.rmux-$RMUXID"
+
