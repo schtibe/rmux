@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( dirname $(cd ${0%/*} && echo $PWD/${0##*/}) )"
-source "$SCRIPT_DIR/rmuxi"
+source "$SCRIPT_DIR/rmuxid"
 TMUXCONF="$RMUXDIR/tmux.conf"
 
 if [ "$1" == "attach" ]; then
