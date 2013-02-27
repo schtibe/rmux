@@ -27,7 +27,8 @@ if [ ! -S "$HOME/.ssh/cm/$HOST:22.conn" ]; then
 	echo Connection setup
 	ssh -X -A "$HOST" "uname -a; who"
 	# uses existing connection
-	rsync -r --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git --exclude="*.pyc" "$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/"
+	rsync -r --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
+		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" "$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/"
 fi
 
 ssh "$@" "$HOST" -t "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
