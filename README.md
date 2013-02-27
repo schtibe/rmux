@@ -46,7 +46,7 @@ cp git-prompt.sh ~/.rmux-\<id\>/
 Add this line to ~/.rmux-\<id\>/bashrc
 
 ````bash
-source "$RMUXDIR/git-prompt.sh
+source "$RMUXDIR/git-prompt.sh"
 ````
 
 
