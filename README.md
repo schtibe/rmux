@@ -28,6 +28,12 @@ Remote commands:
 tmux
 * Create new tmux session
 
+tmuk
+* Reattach to session 0
+
+tmuc N
+* Reattach to session N
+
 Installation
 ------------
 
@@ -63,7 +69,7 @@ Default tmux settings
 ---------------------
 
 The template tmux.conf will map ctrl-b to ctrl-a, according to me ctrl-a is
-better. It adds few more shortcuts, please see in tmux.conf.
+better. It adds few more shortcuts, please see tmux.conf.
 
 vimrc
 -----
