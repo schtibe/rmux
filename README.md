@@ -95,12 +95,14 @@ SSH Settings
 You are free to use another ControlPath or even not use ControlMaster. But it is
 highly recommended to use the setting below.
 
+````
 Host *
 	Compression yes
 	ControlPath ~/.ssh/cm/%r@%h:%p.conn
 	ControlPersist yes
 	ControlMaster auto
 	ServerAliveInterval 600
+````
 
 Create directory ~/.ssh/cm if you use this path
 
