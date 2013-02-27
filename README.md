@@ -43,6 +43,15 @@ set nocp
 let &rtp .= expand(",$HOME/.rmux-$RMUXID/vim,$HOME/.rmux-$RMUDID/vim/after")
 ````
 
+vim python path
+---------------
+
+An example of adding a python path to bundle libraries:
+
+````vimrc
+let $PYTHONPATH .= expand(":$HOME/.rmux-$RMUXID/jedi")
+````
+
 Additional content
 ------------------
 
