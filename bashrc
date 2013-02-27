@@ -3,11 +3,11 @@
 # 5000 unique bash history lines that are shared between 
 # sessions on every command. Happy ctrl-r!!
 shopt -s histappend
+touch "$RMUXDIR/bash_history"
 export HISTFILE="$RMUXDIR/bash_history"
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
-touch "$RMUXDIR/bash_history"
 
 __git_ps1 ()
 {

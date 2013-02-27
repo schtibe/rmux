@@ -31,4 +31,4 @@ if [ ! -S "$HOME/.ssh/cm/$HOST:22.conn" ]; then
 		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" "$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/"
 fi
 
-ssh "$@" "$HOST" -t "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" "$HOST" -t -o SendEnv=LC_ALL,SendEnv=LANG "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
