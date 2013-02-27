@@ -134,13 +134,13 @@ ssh user@host -O exit
 ````
 
 But when your notebook was sleeping and the TCP conenctions died it will take some time to recover.
-I usually don't want to wait and do:
+I usually don't want to wait and simply do:
 
 ````
 killall ssh
 ````
 
-Since you notebook just woke up, you shouldn't kill anything alive.
+Since your notebook just woke up, you shouldn't kill anything alive.
 
 Example for rmux-\<id\> directory
 ---------------------------------
