@@ -17,9 +17,9 @@ export HISTFILE="$RMUXDIR/bash_history"
 export HISTSIZE=6100
 export HISTFILESIZE=6100
 if [ "$PROMPT_COMMAND" == "" ]; then
-	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r"
+	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r"
 else
-	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
+	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r; $PROMPT_COMMAND"
 fi
 # unique bash history done
 
