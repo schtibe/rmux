@@ -25,8 +25,8 @@ NOT conflict with other users on the target systems. We call id \<id\>
 
 ````bash
 cd
-git clone git@github.com:ganwell/rmux.git ~/.rmux-\<id\>
-cd ~/.rmux-\<id\>
+git clone git@github.com:ganwell/rmux.git ~/.rmux-<id>
+cd ~/.rmux-<id>
 ./init-templates.sh
 ````
 
