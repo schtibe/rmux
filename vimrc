@@ -8,3 +8,9 @@ call pathogen#helptags()
 
 syntax on
 filetype plugin on
+
+
+" If you do not change above chances are good you can merge any upstream
+" changes
+"
+" Your settings
