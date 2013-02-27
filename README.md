@@ -19,14 +19,22 @@ imux user@remotehost
 Installation
 ------------
 
-* Check the repository out to ~/.rmux-\<id\>
+Think of an unique id for yourself, a nick name, or something. It should
+conflict with other users on the target systems. We call id \<id\>
+
+
+````bash
+cd
+git clone git@github.com:ganwell/rmux.git ~/.rmux-\<id\>
+~/.rmux-\<id\>/init-templates.sh
+````
+
 * Edit README and add your name and email address
 * Edit rmuxid and set the id to the previous chosen \<id\>
 * Copy or link your ~/.tmux.conf contents to ~/.rmux-\<id\>/tmux.conf
 * Copy or link your ~/.bashrc contents to ~/.rmux-\<id\>/bashrc
 * Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
 * Copy or link your ~/.vim directory to ~/.rmux-\<id\>/vim
-  * !! If your replace the ~/.rmux-<id>/vimrc be sure you keep the lines in ~/.rmux-\<id\>/vimrc
 * Add the ~/.rmux-\<id\>/bin directory to your $PATH
 * Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 
