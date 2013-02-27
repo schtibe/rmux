@@ -19,8 +19,8 @@ imux user@remotehost
 Installation
 ------------
 
-Think of an unique id for yourself, a nick name, or something. It should
-conflict with other users on the target systems. We call id \<id\>
+Think of an unique id for yourself, a nick name or something. It should
+NOT conflict with other users on the target systems. We call id \<id\>
 
 
 ````bash
