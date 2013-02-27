@@ -39,11 +39,13 @@ cd ~/.rmux-<id>
 * Add the ~/.rmux-\<id\>/bin directory to your $PATH
 * Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 
-History
+Bash History
 -------
 
 The template bashrc shares the bash history across sessions and cleans the
-history to contain only unique lines. Remove the section in the bashrc if you
+history to contain only unique lines. User ctrl-r to access the history.
+
+Remove the section in the bashrc if you
 don't want this feature.
 
 vimrc
