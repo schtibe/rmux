@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_DIR="$( dirname $( dirname $(cd ${0%/*} && echo $PWD/${0##*/}) ) )"
-source $SCRIPT_DIR/../rmuxid
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$SCRIPT_DIR/../rmuxid"
 HOST="$1"
 ssh "$HOST" mkdir -p .rmux-$RMUXID
 scp -C ~/.rmux-$RMUXID/tmux-bin "$HOST":.rmux-$RMUXID/tmux-bin
