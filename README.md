@@ -7,11 +7,15 @@ Minimal dependencies are:
 * bash
 * rsync
 
-It assumes that you connect to some kind of unix. And has fixes for few quirks in solaris.
+It assumes that you connect to some kind of unix. And has fixes for few quirks on solaris. To make rmux useful you need:
+
+* python (2.6, 2.7. 3.x)
+* vim
+* tmux
 
 All portable files are stored in ~/.rmux-\<id\>.
 
-Commands:
+Local commands:
 
 rmux user@remotehost
 * Take local ~/.rmux-\<id\> to remote host and setup vim and tmux
@@ -19,6 +23,10 @@ rmux user@remotehost
 imux user@remotehost
 * Install fallback tmux if you cannot install it on the host
 
+Remote commands:
+
+tmux
+* Create new tmux session
 
 Installation
 ------------
@@ -50,6 +58,12 @@ The template bashrc shares the bash history across bash-sessions and cleans the
 history to contain only unique lines. User ctrl-r to access the history.
 
 Remove the section in the bashrc if you don't want this feature.
+
+Default tmux settings
+---------------------
+
+The template tmux.conf will map ctrl-b to ctrl-a, according to me ctrl-a is
+better. It adds few more shortcuts, please see in tmux.conf.
 
 vimrc
 -----
