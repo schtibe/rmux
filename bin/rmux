@@ -13,8 +13,8 @@
 # Attach first session:
 #    tmuk
 
-SCRIPT_DIR="$( dirname $( dirname $(cd ${0%/*} && echo $PWD/${0##*/}) ) )"
-source $SCRIPT_DIR/../rmuxid
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$SCRIPT_DIR/../rmuxid"
 
 HOST="$1"
 shift
