@@ -7,8 +7,11 @@ touch "$RMUXDIR/bash_history"
 export HISTFILE="$RMUXDIR/bash_history"
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
-
+if [ "$PROMPT_COMMAND" == "" ]; then
+	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r"
+else
+	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
+fi
 gprfx=""
 if [ -e /opt/csw/bin/gls ]; then
 	gprfx="g"
@@ -30,7 +33,4 @@ __git_ps1 ()
 
 export -f __git_ps1
 
-export VIMINIT="source $RMUXDIR/vimrc"
-export LC_ALL="$LC_ALL"
-export LANG="$LANG"
 export PS1="\[\033[00;32m\]\u\[\033[00;37m\]@\h \[\033[00;34m\]\w [\$(ls -1 | wc -l | sed 's: ::g') files, \$(${gprfx}ls -lah | ${gprfx}grep -m 1 total | ${gprfx}sed 's/total //')] \$(__git_ps1  )\n\[\033[00;33m\]$> \[\033[00m\]"
