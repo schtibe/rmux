@@ -9,6 +9,14 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
 
+gprfx=""
+if [ -e /opt/csw/bin/gls ]; then
+	gprfx="g"
+fi
+if [ -e /usr/bin/gls ]; then
+	gprfx="g"
+fi
+
 __git_ps1 ()
 {
 	local b="$(git symbolic-ref HEAD 2>/dev/null)";

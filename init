@@ -35,13 +35,6 @@ if [ "$TMUX" == "" ]; then
 	echo "set-option -g default-command \"bash --rcfile '$RMUXDIR/init' -i\"" >> "$RMUXDIR/tmux.conf"
 fi
 
-gprfx=""
-if [ -e /opt/csw/bin/gls ]; then
-	gprfx="g"
-fi
-if [ -e /usr/bin/gls ]; then
-	gprfx="g"
-fi
 
 source $RMUXDIR/bashrc
 
