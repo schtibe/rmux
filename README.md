@@ -7,7 +7,7 @@ Minimal dependencies are:
 * bash
 * rsync
 
-It assumes that you connect to some kind of unix. And has fixes for few quirks on solaris. To make rmux useful you need:
+It also assumes that you connect to some kind of unix and has fixes for few quirks on solaris. To make rmux useful you need:
 
 * python (2.6, 2.7. 3.x)
 * vim
