@@ -33,7 +33,7 @@ newlist = []
 lines.reverse()
 count = 0
 for line in lines:
-	if count > 5000:
+	if count > 6000:
 		break
 	if line in lineset:
 		count += 1

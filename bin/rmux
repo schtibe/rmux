@@ -28,6 +28,5 @@ PID=$!
 if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
-	ssh "$HOST" "touch '.rmux-$RMUXID/bash_history'; touch '.rmux-$RMUXID/my_history'"
 fi
 ssh "$@" "$HOST" -t -o SendEnv=LC_ALL,SendEnv=LANG "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"

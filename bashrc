@@ -1,17 +1,28 @@
 #!/usr/bin/env bash
 
-# 5000 unique bash history lines that are shared between 
+# 6000 unique bash history lines that are shared between 
 # sessions on every command. Happy ctrl-r!!
+BASH_HIST="$RMUXDIR/bash_history"
+if [ ! -f "$BASH_HIST" ]; then
+	echo init >> "$BASH_HIST"
+	chmod 600 "$BASH_HIST"
+fi
+MY_HIST="$RMUXDIR/my_history"
+if [ ! -f "$MY_HIST" ]; then
+	echo init >> "$MY_HIST";
+	chmod 600 "$MY_HIST"
+fi
 shopt -s histappend
-touch "$RMUXDIR/bash_history"
 export HISTFILE="$RMUXDIR/bash_history"
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=6100
+export HISTFILESIZE=6100
 if [ "$PROMPT_COMMAND" == "" ]; then
 	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r"
 else
 	export PROMPT_COMMAND="history -a; $RMUXDIR/bin/unique_history.py; history -r; $PROMPT_COMMAND"
 fi
+# unique bash history done
+
 gprfx=""
 if [ -e /opt/csw/bin/gls ]; then
 	gprfx="g"

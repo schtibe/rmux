@@ -22,8 +22,9 @@ Installation
 * Check the repository out to ~/.rmux-\<id\>
 * Edit README and add your name and email address
 * Edit rmuxid and set the id to the previous chosen \<id\>
+* Copy or link your ~/.tmux.conf to ~/.rmux-\<id\>/tmux.conf
 * Copy or link your ~/.vim directory contents to ~/.rmux-\<id\>/vim
-* Copy or link your ~/.vimrc to ~/.rmux-\<id\>/vimrc
+* Copy or link your ~/.vim directory contents to ~/.rmux-\<id\>/vim
 * Copy or link your ~/.bashrc contents to ~/.rmux-\<id\>/bashrc
   * !! If your replace the ~/.rmux-<id>/vimrc be sure you keep the lines in ~/.rmux-\<id\>/vimrc
 * Add the ~/.rmux-\<id\>/bin directory to your $PATH
