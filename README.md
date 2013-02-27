@@ -1,10 +1,16 @@
 rmux
 ====
 
+Portable configs using rsync. This is a template, but I try to reshape it to a form that allows 
+to easily merge changes from upstream. You can add any other config-files or even binaries.
+It was originally built for tmux and vim configs and assumes you're using pathogen.
+
+All portable file are stored in ~/.rmux-\<id\>.
+
 Commands:
 
 rmux user@remotehost
-	Take local .rmux-id to remote host and setup vim and tmux
+	Take local ~/.rmux-\<id\> to remote host and setup vim and tmux
 
 imux user@remotehost
 	Install fallback tmux if you cannot install it on the host
@@ -13,14 +19,14 @@ imux user@remotehost
 Installation
 ------------
 
-* Check the repository out to ~/.rmux-<id>
+* Check the repository out to ~/.rmux-\<id\>
 * Edit README and add your name and email address
-* Edit rmuxid and set the id to the previous chosen <id>
-* Copy or link your ~/.vim directory contents to ~/.rmux-<id>/vim
-* Copy or link your ~/.vimrc contents to ~/.rmux-<id>/vimrc
-  * !! If your replace the ~/.rmux-<id>/vimrc be sure you keep the lines in ~/.rmux-<id>/vimrc
-* Add the ~/.rmux-<id>/bin directory to your $PATH
-* Source ~/.rmux-<id>/rmuxid in your ~/.bashrc
+* Edit rmuxid and set the id to the previous chosen \<id\>
+* Copy or link your ~/.vim directory contents to ~/.rmux-\<id\>/vim
+* Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
+  * !! If your replace the ~/.rmux-<id>/vimrc be sure you keep the lines in ~/.rmux-\<id\>/vimrc
+* Add the ~/.rmux-\<id\>/bin directory to your $PATH
+* Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 
 See ganwells settings as an example:
 https://github.com/ganwell/rmux/tree/ganwells_settings
@@ -28,26 +34,24 @@ https://github.com/ganwell/rmux/tree/ganwells_settings
 Additional content
 ------------------
 
-* Add a config file ~/.rmux-<id>/
+* Add a config file ~/.rmux-\<id\>/
 * Use the variable $RMUXDIR to find the file on the remote system
 
 Example:
 
 ````bash
-cp git-prompt.sh ~/.rmux-<id>/
+cp git-prompt.sh ~/.rmux-\<id\>/
 ````
 
-Add this line to ~/.rmux-<id>/bashrc
+Add this line to ~/.rmux-\<id\>/bashrc
 
 ````bash
-source "$RMUXDIR/git-prompt.sh
+source "$RMUXDIR/git-prompt.sh"
 ````
 
 
 SSH Settings
 ------------
-
-It recommended to user ControlMaster
 
 Host *
 	Compression yes
@@ -56,4 +60,4 @@ Host *
 	ControlMaster auto
 	ServerAliveInterval 600
 
-Create directory ~/.ssh/cm if you use that path
+Create directory ~/.ssh/cm
