@@ -65,6 +65,9 @@ history to contain only unique lines. User ctrl-r to access the history.
 
 Remove the section in the bashrc if you don't want this feature.
 
+If you don't share ~/.bashrc you can copy the unique history settings from 
+~/.rmux-\<id\>/templates/bashrc to get the feature on your localhost as well.
+
 Default tmux settings
 ---------------------
 
