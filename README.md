@@ -14,11 +14,32 @@ Installation
 ------------
 
 * Check the repository out to ~/.rmux-<id>
+* Edit README and add your name and email address
 * Edit rmuxid and set the id to the previous chosen <id>
 * Copy or link your ~/.vim directory contents to ~/.rmux-<id>/vim
 * Add the ~/.rmux-<id>/bin directory to your $PATH
 * Source ~/.rmux-<id>/rmuxid in your ~/.bashrc
-* Copy or link ~/.bash_history to ~/.rmux-<id>/bash_history
+
+See ganwells settings as an example:
+https://github.com/ganwell/rmux/tree/ganwells_settings
+
+Additional content
+------------------
+
+* Add a config file ~/.rmux-<id>/
+* Use the variable $RMUXDIR to find the file on the remote system
+
+Example:
+
+````bash
+cp git-prompt.sh ~/.rmux-<id>/
+````
+
+Add this line to ~/.rmux-<id>/bashrc
+
+````bash
+source "$RMUXDIR/git-prompt.sh
+````
 
 
 SSH Settings
