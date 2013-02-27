@@ -39,9 +39,6 @@ cd ~/.rmux-<id>
 * Add the ~/.rmux-\<id\>/bin directory to your $PATH
 * Source ~/.rmux-\<id\>/rmuxid in your ~/.bashrc
 
-See ganwells settings as an example:
-https://github.com/ganwell/rmux/tree/ganwells_settings
-
 History
 -------
 

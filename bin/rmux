@@ -21,7 +21,7 @@ shift
 
 ssh -X -A "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
 NOTEXISTS=$?
-rsync -L -r --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
+rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
 		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" \
 		"$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/" &
 PID=$!
