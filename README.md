@@ -126,6 +126,12 @@ Host *
 
 Create directory ~/.ssh/cm if you use this path
 
+These settings will keep a master connection to the server open. You can close it
+
+````
+ssh user@host -O exit
+````
+
 Example for rmux-\<id\> directory
 ---------------------------------
 
