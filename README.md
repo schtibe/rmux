@@ -53,6 +53,9 @@ source "$RMUXDIR/git-prompt.sh"
 SSH Settings
 ------------
 
+You are free to use another ControlPath or even not use ControlMaster. But its
+not recommended.
+
 Host *
 	Compression yes
 	ControlPath ~/.ssh/cm/%r@%h:%p.conn
@@ -60,4 +63,4 @@ Host *
 	ControlMaster auto
 	ServerAliveInterval 600
 
-Create directory ~/.ssh/cm
+Create directory ~/.ssh/cm if you use this path
