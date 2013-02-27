@@ -1,10 +1,16 @@
 rmux
 ====
 
+Portable configs using rsync. This is a template, but I try to reshape it to a form that allows 
+to easily merge changes from upstream. You can add any other config-files or even binaries.
+It was originally built for tmux and vim configs and assumes you're using pathogen.
+
+All portable file are stored in ~/.rmux-<id>.
+
 Commands:
 
 rmux user@remotehost
-	Take local .rmux-id to remote host and setup vim and tmux
+	Take local ~/.rmux-<id> to remote host and setup vim and tmux
 
 imux user@remotehost
 	Install fallback tmux if you cannot install it on the host
@@ -47,8 +53,6 @@ source "$RMUXDIR/git-prompt.sh
 SSH Settings
 ------------
 
-It recommended to user ControlMaster
-
 Host *
 	Compression yes
 	ControlPath ~/.ssh/cm/%r@%h:%p.conn
@@ -56,4 +60,4 @@ Host *
 	ControlMaster auto
 	ServerAliveInterval 600
 
-Create directory ~/.ssh/cm if you use that path
+Create directory ~/.ssh/cm
