@@ -65,7 +65,7 @@ cd ~/.rmux-<id>
 ## Bash History ##
 
 The template bashrc shares the bash history across bash-sessions and cleans the
-history to contain only unique lines. User ctrl-r to access the history.
+history to contain only unique lines. Use ctrl-r to access the history.
 
 Remove the section in the bashrc if you don't want this feature.
 
