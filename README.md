@@ -79,16 +79,6 @@ Host *
 
 Create directory ~/.ssh/cm if you use this path
 
-## Bash history ##
-
-The template bashrc shares the bash history across bash-sessions and cleans the
-history to contain only unique lines. Use ctrl-r to access the history.
-
-Remove the section in the bashrc if you don't want this feature.
-
-If you don't share ~/.bashrc you can copy the unique history settings from 
-~/.rmux-\<id\>/templates/bashrc to get the feature on your localhost as well.
-
 ## Default tmux settings ##
 
 The template tmux.conf will map ctrl-b to ctrl-a, according to me ctrl-a is
@@ -167,6 +157,16 @@ killall ssh
 ````
 
 Since your notebook just woke up, you shouldn't kill anything alive.
+
+## Bash history ##
+
+The template bashrc shares the bash history across bash-sessions and cleans the
+history to contain only unique lines. Use ctrl-r to access the history.
+
+Remove the section in the bashrc if you don't want this feature.
+
+If you don't share ~/.bashrc you can copy the unique history settings from 
+~/.rmux-\<id\>/templates/bashrc to get the feature on your localhost as well.
 
 ## Example for rmux-\<id\> directory ##
 
