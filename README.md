@@ -62,6 +62,23 @@ cd ~/.rmux-<id>
 * Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
 * Copy or link your ~/.vim directory to ~/.rmux-\<id\>/vim
 
+### SSH Settings ###
+
+You are free to use another ControlPath or even not use ControlMaster. But it is
+highly recommended to use the setting below (ControlPersist is essential for the 
+performance of rmux).
+
+````
+Host *
+	Compression yes
+	ControlPath ~/.ssh/cm/%r@%h:%p.conn
+	ControlPersist yes
+	ControlMaster auto
+	ServerAliveInterval 600
+````
+
+Create directory ~/.ssh/cm if you use this path
+
 ## Bash History ##
 
 The template bashrc shares the bash history across bash-sessions and cleans the
@@ -133,24 +150,7 @@ Add this line to ~/.rmux-\<id\>/bashrc
 source "$RMUXDIR/git-prompt.sh"
 ````
 
-## SSH Settings ##
-
-You are free to use another ControlPath or even not use ControlMaster. But it is
-highly recommended to use the setting below (ControlPersist is essential for the 
-performance of rmux).
-
-````
-Host *
-	Compression yes
-	ControlPath ~/.ssh/cm/%r@%h:%p.conn
-	ControlPersist yes
-	ControlMaster auto
-	ServerAliveInterval 600
-````
-
-Create directory ~/.ssh/cm if you use this path
-
-### SSH tricks ###
+## SSH tricks ##
 
 These settings will keep a master connection to the server open. You can close it
 (I never do):
