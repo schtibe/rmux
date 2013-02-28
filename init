@@ -25,14 +25,12 @@ alias tmux="$RMUXDIR/tmux-start"
 alias tmuc="$RMUXDIR/tmux-start attach -t"
 alias tmuk="$RMUXDIR/tmux-start attach"
 export VIMINIT="source $RMUXDIR/vimrc"
-git config --global color.ui true 2> /dev/null
 
 if [ "$TMUX" == "" ]; then
 	echo Commands: tmuk = attach session 0, tmuc N = attach session N
 	echo tmux sessions:
 	tmux ls 2> /dev/null
 	echo >> "$RMUXDIR/tmux.conf"
-	echo "set-option -g default-command \"bash --rcfile '$RMUXDIR/init' -i\"" >> "$RMUXDIR/tmux.conf"
 fi
 
 

@@ -2,6 +2,7 @@
 
 # 6000 unique bash history lines that are shared between 
 # sessions on every command. Happy ctrl-r!!
+# begin
 BASH_HIST="$RMUXDIR/bash_history"
 if [ ! -f "$BASH_HIST" ]; then
 	echo init >> "$BASH_HIST"
@@ -21,7 +22,7 @@ if [ "$PROMPT_COMMAND" == "" ]; then
 else
 	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r; $PROMPT_COMMAND"
 fi
-# unique bash history done
+# end
 
 gprfx=""
 if [ -e /opt/csw/bin/gls ]; then
@@ -41,6 +42,7 @@ __git_ps1 ()
 		printf " (%s)" "${b##refs/heads/}";# "$s";
 	fi
 }
+git config --global color.ui true 2> /dev/null
 
 export -f __git_ps1
 
