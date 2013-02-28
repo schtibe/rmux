@@ -10,9 +10,12 @@ It might still need some refactoring, pull-requests are welcome. Minimal depende
 
 It also assumes that you connect to some kind of unix and has fixes for few quirks on solaris. To make rmux useful you need:
 
-* python (2.6, 2.7. 3.x)
 * vim
 * tmux
+
+For the bash history feature you need:
+
+* python (2.6, 2.7. 3.x)
 
 All portable files are stored in ~/.rmux-\<id\>.
 
