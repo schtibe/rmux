@@ -90,6 +90,11 @@ I also recommend this because of vim acting strange without:
 set -g default-terminal "screen-256color"
 ````
 
+You can place ~/.rmux-\<id\>/tmux-attach-hook and
+~/.rmux-\<id\>/tmux-detach-hook on a remote system to do something on
+detach/attach. These files won't be synced, you have to place them directly on
+the remote system.
+
 vimrc
 -----
 
