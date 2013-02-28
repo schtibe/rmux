@@ -116,7 +116,8 @@ SSH Settings
 ------------
 
 You are free to use another ControlPath or even not use ControlMaster. But it is
-highly recommended to use the setting below.
+highly recommended to use the setting below (ControlPersist is essential for the 
+performance of rmux).
 
 ````
 Host *
