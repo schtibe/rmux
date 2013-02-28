@@ -75,6 +75,18 @@ Default tmux settings
 The template tmux.conf will map ctrl-b to ctrl-a, according to me ctrl-a is
 better. It adds few more shortcuts, please see tmux.conf.
 
+The following line is needed in your tmux.conf:
+
+````
+set-option -g default-command "bash --rcfile '$RMUXDIR/init' -i"
+````
+
+I also recommend this because of vim acting strange without:
+
+````
+set -g default-terminal "screen-256color"
+````
+
 vimrc
 -----
 
