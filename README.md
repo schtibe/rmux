@@ -4,6 +4,7 @@ rmux
 Portable configs using rsync. It was originally built for tmux and vim configs and assumes you're using pathogen.
 It might still need some refactoring, pull-requests are welcome. Minimal dependencies are:
 
+* ssh
 * bash
 * rsync
 
