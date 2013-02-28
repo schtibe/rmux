@@ -62,7 +62,7 @@ cd ~/.rmux-<id>
 * Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
 * Copy or link your ~/.vim directory to ~/.rmux-\<id\>/vim
 
-### SSH Settings ###
+### SSH settings ###
 
 You are free to use another ControlPath or even not use ControlMaster. But it is
 highly recommended to use the setting below (ControlPersist is essential for the 
@@ -79,7 +79,7 @@ Host *
 
 Create directory ~/.ssh/cm if you use this path
 
-## Bash History ##
+## Bash history ##
 
 The template bashrc shares the bash history across bash-sessions and cleans the
 history to contain only unique lines. Use ctrl-r to access the history.
