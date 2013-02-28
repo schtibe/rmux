@@ -142,7 +142,7 @@ source "$RMUXDIR/git-prompt.sh"
 
 ## SSH tricks ##
 
-These settings will keep a master connection to the server open. You can close it
+The recommended settings will keep a master connection to the server open. You can close it
 (I never do):
 
 ````
