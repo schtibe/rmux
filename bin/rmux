@@ -19,16 +19,14 @@ source "$SCRIPT_DIR/../rmuxid"
 HOST="$1"
 shift
 
-if [[ ! "$HOST" == *@* ]]; then
-	HOST="$USER@$HOST"
+ssh -X -A "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+NOTEXISTS=$?
+rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
+		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" \
+		"$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/" &
+PID=$!
+if [ $NOTEXISTS -ne 0 ]; then
+	echo "Initializing"
+	wait $PID
 fi
-
-if [ ! -S "$HOME/.ssh/cm/$HOST:22.conn" ]; then
-	echo Connection setup
-	ssh -X -A "$HOST" "uname -a; who"
-	# uses existing connection
-	rsync -L -r --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
-		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" "$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/"
-fi
-
-ssh "$@" "$HOST" -t "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" "$HOST" -t -o SendEnv=LC_ALL,SendEnv=LANG "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"

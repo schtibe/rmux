@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# 6000 unique bash history lines that are shared between 
+# sessions on every command. Happy ctrl-r!!
+BASH_HIST="$RMUXDIR/bash_history"
+if [ ! -f "$BASH_HIST" ]; then
+	echo init >> "$BASH_HIST"
+	chmod 600 "$BASH_HIST"
+fi
+MY_HIST="$RMUXDIR/my_history"
+if [ ! -f "$MY_HIST" ]; then
+	echo init >> "$MY_HIST";
+	chmod 600 "$MY_HIST"
+fi
+shopt -s histappend
+export HISTFILE="$RMUXDIR/bash_history"
+export HISTSIZE=6100
+export HISTFILESIZE=6100
+if [ "$PROMPT_COMMAND" == "" ]; then
+	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r"
+else
+	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r; $PROMPT_COMMAND"
+fi
+# unique bash history done
+
+gprfx=""
+if [ -e /opt/csw/bin/gls ]; then
+	gprfx="g"
+fi
+if [ -e /usr/bin/gls ]; then
+	gprfx="g"
+fi
+
+__git_ps1 ()
+{
+	local b="$(git symbolic-ref HEAD 2>/dev/null)";
+	if [ -n "$b" ]; then
+		if [ -n "$s" ]; then
+			s=",$s"
+		fi
+		printf " (%s)" "${b##refs/heads/}";# "$s";
+	fi
+}
+
+export -f __git_ps1
+
+export PS1="\[\033[00;32m\]\u\[\033[00;37m\]@\h \[\033[00;34m\]\w [\$(ls -1 | wc -l | sed 's: ::g') files, \$(${gprfx}ls -lah | ${gprfx}grep -m 1 total | ${gprfx}sed 's/total //')] \$(__git_ps1  )\n\[\033[00;33m\]$> \[\033[00m\]"
