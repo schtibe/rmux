@@ -30,4 +30,4 @@ if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
 fi
-ssh "$@" "$HOST" -t -o SendEnv=LC_ALL,SendEnv=LANG "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" -t -o SendEnv=LC_ALL,SendEnv=LANG "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
