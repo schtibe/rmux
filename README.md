@@ -7,7 +7,8 @@ It might still need some refactoring, pull-requests are welcome. Minimal depende
 * bash
 * rsync
 
-It also assumes that you connect to some kind of unix and has fixes for few quirks on solaris. To make rmux useful you need:
+It also assumes that you connect to some kind of unix and has fixes for few quirks on solaris. To make rmux useful
+you usually need:
 
 * vim
 * tmux
