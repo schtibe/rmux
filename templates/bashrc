@@ -15,8 +15,11 @@ if [ ! -f "$MY_HIST" ]; then
 fi
 shopt -s histappend
 export HISTFILE="$RMUXDIR/bash_history"
-export HISTSIZE=6100
-export HISTFILESIZE=6100
+# Limiting to 6000 does not happen here. You are allowed to have 4000 lines more
+# "linear" history than unique history. As soon as you add a non unique line,
+# "linear" history will collapse to unique history.
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 if [ "$PROMPT_COMMAND" == "" ]; then
 	export PROMPT_COMMAND="history -a; $RMUXDIR/unique_history.py; history -r"
 else
