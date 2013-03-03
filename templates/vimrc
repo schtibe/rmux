@@ -1,7 +1,7 @@
 " Basic initialization for RMUX change if need, add your settings
 set nocp
 let &rtp .= expand(",$RMUXDIR/vim,$RMUXDIR/vim/after")
-let $PYTHONPATH .= expand(":$RMUXDIR/vim/jedi")
+let $PYTHONPATH .= expand(":$RMUXDIR/jedi")
 
 call pathogen#infect()
 call pathogen#helptags()
