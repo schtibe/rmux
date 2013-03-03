@@ -116,7 +116,7 @@ to add these lines:
 
 ````vimrc
 set nocp
-let &rtp .= expand(",$HOME/.rmux-$RMUXID/vim,$HOME/.rmux-$RMUDID/vim/after")
+let &rtp .= expand(",$RMUXDIR/vim,$RMUXDIR/vim/after")
 ````
 
 ### Vim python path ###
@@ -124,7 +124,7 @@ let &rtp .= expand(",$HOME/.rmux-$RMUXID/vim,$HOME/.rmux-$RMUDID/vim/after")
 An example of adding a python path to bundle libraries in rmux:
 
 ````vimrc
-let $PYTHONPATH .= expand(":$HOME/.rmux-$RMUXID/jedi")
+let $PYTHONPATH .= expand(":$RMUXDIR/jedi")
 ````
 
 ## Additional content ##
