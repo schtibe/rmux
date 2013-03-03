@@ -40,6 +40,9 @@ tmuk
 tmuc N
 * Reattach to session N
 
+rxsu
+* Get root privileges without losing your settings
+
 ## Installation ##
 
 Think of an unique id for yourself, a nick name or something. It should

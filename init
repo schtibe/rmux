@@ -21,13 +21,14 @@ fi
 chmod 755 "$RMUXDIR/tmux-start"
 alias script="script -c \"bash --rcfile '$RMUXDIR/init' -i\""
 alias bash="bash --rcfile '$RMUXDIR/init' -i"
+alias rxsu="sudo bash --rcfile '$RMUXDIR/init' -i"
 alias tmux="$RMUXDIR/tmux-start"
 alias tmuc="$RMUXDIR/tmux-start attach -t"
 alias tmuk="$RMUXDIR/tmux-start attach"
 export VIMINIT="source $RMUXDIR/vimrc"
 
 if [ "$TMUX" == "" ]; then
-	echo Commands: tmuk = attach session 0, tmuc N = attach session N
+	echo Commands: tmuk = attach sess. 0, tmuc N = attach sess. N, rxsu = root privs.
 	echo tmux sessions:
 	tmux ls 2> /dev/null
 	echo >> "$RMUXDIR/tmux.conf"
