@@ -1,14 +1,15 @@
 # rmux #
 
-Portable configs using rsync. It was originally built for tmux and vim configs and assumes you're using pathogen.
-It might still need some refactoring, pull-requests are welcome. Minimal dependencies are:
+Portable configs using rsync. It was originally built for tmux and vim configs, but it will work with anything that
+takes config-location as argument or from a environment variable.
+
+Minimal dependencies are:
 
 * ssh
 * bash
 * rsync
 
-It also assumes that you connect to some kind of unix and has fixes for few quirks on solaris. To make rmux useful
-you usually need:
+It assumes that you connect to some kind of unix. The default templates are built for:
 
 * vim
 * tmux
