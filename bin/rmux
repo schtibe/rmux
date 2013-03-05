@@ -17,40 +17,32 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$SCRIPT_DIR/../rmuxid"
 
 HOST="$1"
+PORT="22"
 shift
 
-PORT="22"
-
-SHORTOPTS="p:"
-LONGOPTS="port:"
-
-ARGS=`getopt -s bash --options $SHORTOPTS --longoptions $LONGOPTS  -- "$@" 2> /dev/null `
-
-eval set -- "$ARGS"
-
-while true; do
-	case "$1" in
-		"-p" | "--port")
-			shift
-			PORT="$1"
-			;;
-		*)
-			shift
-			break
-			;;
-	esac
-	shift
+argc="$#"
+for (( argn=1; argn<=argc; argn++)); do
+    if [[ "${!argn}" == "-p" ]]; then
+		PORTINDEX="$((argn + 1))"
+		PORT="${!PORTINDEX}"
+		break
+    fi
+    if [[ "${!argn}" == "--port" ]]; then
+		PORTINDEX="$((argn + 1))"
+		PORT="${!PORTINDEX}"
+		break
+    fi
 done
 
-ssh "$@" -X -A -p "$PORT" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+ssh "$@" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
 NOTEXISTS=$?
 rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
-		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" \
-        --exclude=/tmux-attach-hook --exclude=/tmux-detach-hook \
-		"$HOME/.rmux-$RMUXID/" --rsh="ssh -p$PORT" "$HOST":".rmux-$RMUXID/" &
+		--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
+		--exclude=/tmux-attach-hook --exclude="*.pyc" --rsh="ssh -p$PORT" \
+		"$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/" &
 PID=$!
 if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
 fi
-ssh "$@" -p "$PORT" -t -o SendEnv=LC_ALL,SendEnv=LANG "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" -t -o SendEnv=LC_ALL,SendEnv=LANG "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
