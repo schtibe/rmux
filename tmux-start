@@ -13,6 +13,7 @@ fi
 if [ -e "$RMUXDIR/tmux-bin" ]; then
 	"$RMUXDIR/tmux-bin" -f "$TMUXCONF" "$@"
 else
+	# Solaris compatibilty
 	if [ -e /opt/csw/bin/tmux ]; then
 		/opt/csw/bin/tmux -f "$TMUXCONF" "$@"
 	else
