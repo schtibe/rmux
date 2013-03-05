@@ -5,8 +5,8 @@ source "$SCRIPT_DIR/rmuxid"
 TMUXCONF="$RMUXDIR/tmux.conf"
 
 if [ "$1" == "attach" ]; then
-	if [ -e "$HOME/.rmux/attach"  ]; then
-		"$HOME/.rmux/attach"
+	if [ -e "$RMUXDIR/tmux-attach-hook"  ]; then
+		"$RMUXDIR/tmux-attach-hook"
 	fi
 fi
 
@@ -21,8 +21,8 @@ else
 fi
 
 if [ "$1" == "attach" ]; then
-	if [ -e "$HOME/.rmux/detach"  ]; then
-		"$HOME/.rmux/detach"
+	if [ -e "$RMUXDIR/tmux-detach-hook"  ]; then
+		"$RMUXDIR/tmux-detach-hook"
 	fi
 fi
 

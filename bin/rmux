@@ -24,7 +24,7 @@ PORT="22"
 SHORTOPTS="p:"
 LONGOPTS="port:"
 
-ARGS=`getopt -s bash --options $SHORTOPTS --longoptions $LONGOPTS  -- "$@" `
+ARGS=`getopt -s bash --options $SHORTOPTS --longoptions $LONGOPTS  -- "$@" 2> /dev/null `
 
 eval set -- "$ARGS"
 
@@ -35,20 +35,22 @@ while true; do
 			PORT="$1"
 			;;
 		*)
+			shift
 			break
 			;;
 	esac
 	shift
 done
 
-ssh -X -A "$HOST" -p "$PORT" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+ssh "$@" -X -A -p "$PORT" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
 NOTEXISTS=$?
 rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
 		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" \
+        --exclude=/tmux-attach-hook --exclude=/tmux-detach-hook \
 		"$HOME/.rmux-$RMUXID/" --rsh="ssh -p$PORT" "$HOST":".rmux-$RMUXID/" &
 PID=$!
 if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
 fi
-ssh "$@" "$HOST" -p "$PORT" -t -o SendEnv=LC_ALL,SendEnv=LANG "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" -p "$PORT" -t -o SendEnv=LC_ALL,SendEnv=LANG "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
