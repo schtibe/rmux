@@ -194,3 +194,8 @@ lrwxr-xr-x  1 ganwell  staff    25B Feb 27 21:44 tmux.conf -> /Users/ganwell/.tm
 lrwxr-xr-x  1 ganwell  staff    19B Feb 27 21:44 vim -> /Users/ganwell/.vim
 lrwxr-xr-x  1 ganwell  staff    21B Feb 27 21:44 vimrc -> /Users/ganwell/.vimrc
 ````
+
+Authors
+
+* https://github.com/ganwell
+* https://github.com/schtibe
