@@ -69,7 +69,7 @@ cd ~/.rmux-<id>
 Optional:
 
 * Create ~/.rmux-\<id\>/bashpre if you need to execute something
-  the bash is set up. It will be source in init
+  the bash is set up. It will be sourced in init
 * Remove  ~/.rmux-\<id\>/tmux.conf if you don't want to use tmux
 * Remove ~/.rmux-\<id\>/vimrc , ~/.rmux-\<id\>/vim if you don't
   want to use vim
