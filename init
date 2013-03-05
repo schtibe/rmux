@@ -2,6 +2,10 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$SCRIPT_DIR/rmuxid"
 
+if [ -e "$RMUXDIR/bashpre" ]; then
+	source "$RMUXDIR/bashpre"
+fi
+
 echo Setting up rmux
 
 export VISUAL=vi
@@ -18,22 +22,26 @@ if [ -e "$HOME/.bash_profile" ]; then
 	source "$HOME/.bash_profile"
 fi
 
-chmod 755 "$RMUXDIR/tmux-start"
 alias script="script -c \"bash --rcfile '$RMUXDIR/init' -i\""
 alias bash="bash --rcfile '$RMUXDIR/init' -i"
 alias rxsu="sudo bash --rcfile '$RMUXDIR/init' -i"
-alias tmux="$RMUXDIR/tmux-start"
-alias tmuc="$RMUXDIR/tmux-start attach -t"
-alias tmuk="$RMUXDIR/tmux-start attach"
-export VIMINIT="source $RMUXDIR/vimrc"
+# only setup tmux and vim if they are configured
+if [ -e "$RMUXDIR/tmux.conf" ]; then
+	alias tmux="$RMUXDIR/tmux-start"
+	alias tmuc="$RMUXDIR/tmux-start attach -t"
+	alias tmuk="$RMUXDIR/tmux-start attach"
+fi
+if [ -e "$RMUXDIR/vimrc" ]; then
+	export VIMINIT="source $RMUXDIR/vimrc"
+fi
 
 if [ "$TMUX" == "" ]; then
 	echo Commands: tmuk = attach sess. 0, tmuc N = attach sess. N, rxsu = root privs.
-	echo tmux sessions:
-	tmux ls 2> /dev/null
-	echo >> "$RMUXDIR/tmux.conf"
+	if [ -e "$RMUXDIR/tmux.conf" ]; then
+		echo tmux sessions:
+		tmux ls 2> /dev/null
+	fi
 fi
 
-
-source $RMUXDIR/bashrc
+source "$RMUXDIR/bashrc"
 
