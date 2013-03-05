@@ -24,7 +24,7 @@ PORT="22"
 SHORTOPTS="p:"
 LONGOPTS="port:"
 
-ARGS=`getopt -s bash --options $SHORTOPTS --longoptions $LONGOPTS  -- "$@" `
+ARGS=`getopt -s bash --options $SHORTOPTS --longoptions $LONGOPTS  -- "$@" 2> /dev/null `
 
 eval set -- "$ARGS"
 
@@ -35,13 +35,14 @@ while true; do
 			PORT="$1"
 			;;
 		*)
+			shift
 			break
 			;;
 	esac
 	shift
 done
 
-ssh -X -A "$HOST" -p "$PORT" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+ssh "$@" -X -A -p "$PORT" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
 NOTEXISTS=$?
 rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
 		--exclude=/bash_history --exclude=/my_history --exclude="*.pyc" \
