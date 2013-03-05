@@ -36,8 +36,10 @@ if [ -e "$RMUXDIR/vimrc" ]; then
 fi
 
 if [ "$TMUX" == "" ]; then
-	echo Commands: tmuk = attach sess. 0, tmuc N = attach sess. N, rxsu = root privs.
+	echo "Commands:  rxsu     root privileges"
 	if [ -e "$RMUXDIR/tmux.conf" ]; then
+		echo "           tmuk     attach session 0"
+		echo "           tmuc N   attach session N"
 		echo tmux sessions:
 		tmux ls 2> /dev/null
 	fi
