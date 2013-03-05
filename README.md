@@ -66,6 +66,14 @@ cd ~/.rmux-<id>
 * Copy or link your ~/.vimrc contents to ~/.rmux-\<id\>/vimrc
 * Copy or link your ~/.vim directory to ~/.rmux-\<id\>/vim
 
+Optional:
+
+* Create ~/.rmux-\<id\>/bashpre if you need to execute something
+  the bash is set up. It will be source in init
+* Remove  ~/.rmux-\<id\>/tmux.conf if you don't want to use tmux
+* Remove ~/.rmux-\<id\>/vimrc , ~/.rmux-\<id\>/vim if you don't
+  want to use vim
+
 ### SSH settings ###
 
 You are free to use another ControlPath or even not use ControlMaster. But it is
