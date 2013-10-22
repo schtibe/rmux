@@ -29,7 +29,8 @@ if [ $NOTEXISTS -eq 255 ]; then
 fi
 rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
 		--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
-		--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" --exclude=".git/" --rsh="ssh -p$PORT" \
+		--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
+		-M--include="__pycache__" -M--include="*.pyc" --exclude=".git/" --rsh="ssh -p$PORT" \
 		"$HOME/.rmux-$RMUXID/" "$HOST":".rmux-$RMUXID/" &
 PID=$!
 if [ $NOTEXISTS -ne 0 ]; then
