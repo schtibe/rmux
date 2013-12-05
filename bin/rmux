@@ -37,6 +37,4 @@ if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
 fi
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-ssh "$@" -t -o SendEnv='LANG LC_ALL' "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+ssh "$@" -t -o SendEnv='LANG LC_* LANGUAGE' "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
