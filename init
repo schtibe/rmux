@@ -45,5 +45,6 @@ if [ "$TMUX" == "" ]; then
 	fi
 fi
 
+export LANGUAGE=$LANG
 source "$RMUXDIR/bashrc"
 
