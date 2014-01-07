@@ -20,6 +20,11 @@ For the bash history feature you need:
 
 All portable files are stored in ~/.rmux-\<id\>.
 
+
+### New ###
+
+You can now chain rmux commands.
+
 ### Commands ###
 
 Local commands:
@@ -76,20 +81,7 @@ Optional:
 
 ### SSH settings ###
 
-You are free to use another ControlPath or even not use ControlMaster. But it is
-highly recommended to use the setting below (ControlPersist is essential for the 
-performance of rmux).
-
-````
-Host *
-	Compression yes
-	ControlPath ~/.ssh/cm/%r@%h:%p.conn
-	ControlPersist yes
-	ControlMaster auto
-	ServerAliveInterval 600
-````
-
-Create directory ~/.ssh/cm if you use this path
+No ssh settings needed anymore.
 
 ## Default tmux settings ##
 
