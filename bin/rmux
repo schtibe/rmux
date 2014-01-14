@@ -3,6 +3,8 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$SCRIPT_DIR/../rmuxid"
 
+export | grep -E "(LC|LANG)" > "$RMUXDIR/set_lc"
+
 HOST="$1"
 PORT="22"
 shift
