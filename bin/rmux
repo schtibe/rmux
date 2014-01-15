@@ -23,7 +23,7 @@ for (( argn=1; argn<=argc; argn++)); do
     fi
 done
 
-CCP=$RMUXDIR/cm/${HOST}.conn
+CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
 if [ ! -e $CCP ]; then
 	ssh -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600 "$HOST"
 fi

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$SCRIPT_DIR/../rmuxid"
+
+export | grep -E "(LC|LANG)" > "$RMUXDIR/set_lc"
+
+HOST="$1"
+PORT="22"
+shift
+
+argc="$#"
+for (( argn=1; argn<=argc; argn++)); do
+    if [[ "${!argn}" == "-p" ]]; then
+		PORTINDEX="$((argn + 1))"
+		PORT="${!PORTINDEX}"
+		break
+    fi
+    if [[ "${!argn}" == "--port" ]]; then
+		PORTINDEX="$((argn + 1))"
+		PORT="${!PORTINDEX}"
+		break
+    fi
+done
+
+CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
+ssh -O exit -o "ControlPath=$CCP" "$HOST"
