@@ -38,7 +38,7 @@ imux user@remotehost
 emux user@remotehost
 * Close the named connection
 
-vmux user@remotehost
+vmux
 * rmux for vagrant boxes uses vagrant ssh
 
 Remote commands:
@@ -47,7 +47,7 @@ tmux
 * Create new tmux session
 
 tmuk
-* Reattach to session 0
+* Reattach to the last session
 
 tmuc N
 * Reattach to session N
