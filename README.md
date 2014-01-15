@@ -38,6 +38,9 @@ imux user@remotehost
 emux user@remotehost
 * Close the named connection
 
+vmux user@remotehost
+* rmux for vagrant boxes uses vagrant ssh
+
 Remote commands:
 
 tmux
