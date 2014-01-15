@@ -35,6 +35,9 @@ rmux user@remotehost \<arguments passed to ssh\>
 imux user@remotehost
 * Install fallback tmux if you cannot install it on the host
 
+emux user@remotehost
+* Close the named connection
+
 Remote commands:
 
 tmux
