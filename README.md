@@ -20,6 +20,11 @@ For the bash history feature you need:
 
 All portable files are stored in ~/.rmux-\<id\>.
 
+
+### New ###
+
+You can now chain rmux commands.
+
 ### Commands ###
 
 Local commands:
@@ -30,13 +35,19 @@ rmux user@remotehost \<arguments passed to ssh\>
 imux user@remotehost
 * Install fallback tmux if you cannot install it on the host
 
+emux user@remotehost
+* Close the named connection
+
+vmux
+* rmux for vagrant boxes uses vagrant ssh
+
 Remote commands:
 
 tmux
 * Create new tmux session
 
 tmuk
-* Reattach to session 0
+* Reattach to the last session
 
 tmuc N
 * Reattach to session N
@@ -69,27 +80,14 @@ cd ~/.rmux-<id>
 Optional:
 
 * Create ~/.rmux-\<id\>/bashpre if you need to execute something
-  the bash is set up. It will be source in init
+  the bash is set up. It will be sourced in init
 * Remove  ~/.rmux-\<id\>/tmux.conf if you don't want to use tmux
 * Remove ~/.rmux-\<id\>/vimrc , ~/.rmux-\<id\>/vim if you don't
   want to use vim
 
 ### SSH settings ###
 
-You are free to use another ControlPath or even not use ControlMaster. But it is
-highly recommended to use the setting below (ControlPersist is essential for the 
-performance of rmux).
-
-````
-Host *
-	Compression yes
-	ControlPath ~/.ssh/cm/%r@%h:%p.conn
-	ControlPersist yes
-	ControlMaster auto
-	ServerAliveInterval 600
-````
-
-Create directory ~/.ssh/cm if you use this path
+No ssh settings needed anymore.
 
 ## Default tmux settings ##
 
@@ -203,7 +201,11 @@ lrwxr-xr-x  1 ganwell  staff    19B Feb 27 21:44 vim -> /Users/ganwell/.vim
 lrwxr-xr-x  1 ganwell  staff    21B Feb 27 21:44 vimrc -> /Users/ganwell/.vimrc
 ````
 
-Authors
+# Authors #
 
 * https://github.com/ganwell
 * https://github.com/schtibe
+
+# GitHub #
+
+https://github.com/ganwell/rmux

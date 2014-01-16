@@ -5,29 +5,12 @@ source "$SCRIPT_DIR/../rmuxid"
 
 export | grep -E "(LC|LANG)" > "$RMUXDIR/set_lc"
 
-HOST="$1"
-PORT="22"
-shift
-
-argc="$#"
-for (( argn=1; argn<=argc; argn++)); do
-    if [[ "${!argn}" == "-p" ]]; then
-		PORTINDEX="$((argn + 1))"
-		PORT="${!PORTINDEX}"
-		break
-    fi
-    if [[ "${!argn}" == "--port" ]]; then
-		PORTINDEX="$((argn + 1))"
-		PORT="${!PORTINDEX}"
-		break
-    fi
-done
-
-CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
+VID=`cat .vagrant/machines/default/*/id`
+CCP="$RMUXDIR/cm/${VID}.conn"
 if [ ! -e $CCP ]; then
-	ssh -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600 "$HOST"
+	vagrant ssh -- -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600
 fi
-ssh -o "ControlPath=$CCP" "$@" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+vagrant ssh -c "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]" -- -o "ControlPath=$CCP"
 NOTEXISTS=$?
 # Exit on ssh argument errors, we can't recover from that
 if [ $NOTEXISTS -eq 255 ]; then
@@ -41,7 +24,7 @@ if [ $RMUXCHECK -eq 0 ]; then
 			--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
 			--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
 			-M--include="__pycache__" -M--include="*.pyc" --exclude=".git/" --rsh="ssh -p$PORT" \
-			-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
+			-e"vagrant ssh -- -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
 			"$HOST":".rmux-$RMUXID/" > /dev/null &
 	PID=$!
 else
@@ -49,7 +32,7 @@ else
 			--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
 			--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
 			--exclude=".git/" --rsh="ssh -p$PORT" \
-			-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
+			-e"vagrant ssh -- -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
 			"$HOST":".rmux-$RMUXID/" > /dev/null &
 	PID=$!
 fi
@@ -57,4 +40,5 @@ if [ $NOTEXISTS -ne 0 ]; then
 	echo "Initializing"
 	wait $PID
 fi
-ssh "$@" -t -o SendEnv=LC_ALL,SendEnv=LANG "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
+export LANGUAGE=$LANG
+vagrant ssh -c "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i" -- -o "ControlPath=$CCP"

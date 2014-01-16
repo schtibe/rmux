@@ -24,7 +24,7 @@ fi
 
 alias script="script -c \"bash --rcfile '$RMUXDIR/init' -i\""
 alias bash="bash --rcfile '$RMUXDIR/init' -i"
-alias rxsu="sudo bash --rcfile '$RMUXDIR/init' -i"
+alias rxsu="sudo -E bash --rcfile '$RMUXDIR/init' -i"
 # only setup tmux and vim if they are configured
 if [ -e "$RMUXDIR/tmux.conf" ]; then
 	alias tmux="$RMUXDIR/tmux-start"
@@ -45,5 +45,6 @@ if [ "$TMUX" == "" ]; then
 	fi
 fi
 
+export LANGUAGE=$LANG
 source "$RMUXDIR/bashrc"
 
