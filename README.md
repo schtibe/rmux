@@ -6,11 +6,11 @@ takes config-location as argument or from a environment variable.
 Minimal dependencies are:
 
 * Local/Remote:
-** ssh
-** bash
-** rsync
+  * ssh
+  * bash
+  * rsync
 * Only local:
-** python
+  * python
 
 It assumes that you connect to some kind of unix. The default templates are built for:
 
