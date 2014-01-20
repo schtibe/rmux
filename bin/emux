@@ -25,4 +25,4 @@ done
 
 CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
 ssh -O exit -o "ControlPath=$CCP" "$HOST"
-rm "$CPP"
+rm -f "$CPP"
