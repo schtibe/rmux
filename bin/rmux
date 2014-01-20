@@ -22,16 +22,25 @@ for (( argn=1; argn<=argc; argn++)); do
 		break
     fi
 done
-
+NOTEXISTS=0
 CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
 if [ ! -e $CCP ]; then
 	ssh -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600 "$HOST"
-fi
-ssh -o "ControlPath=$CCP" "$@" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
-NOTEXISTS=$?
-# Exit on ssh argument errors, we can't recover from that
-if [ $NOTEXISTS -eq 255 ]; then
-	exit 255
+	ssh -o "ControlPath=$CCP" "$@" "$HOST" "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]"
+	NOTEXISTS=$?
+	# Exit on ssh argument errors, we can't recover from that
+	if [ $NOTEXISTS -eq 255 ]; then
+		exit 255
+	fi
+else
+	echo Checking reachablity: timeout is 8 seconds
+	OUT=`ssh -o "ControlPath=$CCP" -o ConnectTimeout=8 -o ServerAliveInterval=600 "$HOST" echo pong`
+	echo Answer: $OUT
+	if [ "pong" != "$OUT" ]; then
+		echo Host not reachable: creating new connection
+		rm "$CCP"
+		ssh -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600 "$HOST"
+	fi
 fi
 rsync -M--include="nothing" . > /dev/null 2> /dev/null
 RMUXCHECK=$?

@@ -6,15 +6,27 @@ source "$SCRIPT_DIR/../rmuxid"
 export | grep -E "(LC|LANG)" > "$RMUXDIR/set_lc"
 
 VID=`cat .vagrant/machines/default/*/id`
+NOTEXISTS=0
 CCP="$RMUXDIR/cm/${VID}.conn"
 if [ ! -e $CCP ]; then
 	vagrant ssh -- -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600
-fi
-vagrant ssh -c "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]" -- -o "ControlPath=$CCP"
-NOTEXISTS=$?
-# Exit on ssh argument errors, we can't recover from that
-if [ $NOTEXISTS -eq 255 ]; then
-	exit 255
+	vagrant ssh -c "uname -a; who; mkdir -p '.rmux-$RMUXID/'; [ -f '.rmux-$RMUXID/init' ]" -- -o "ControlPath=$CCP"
+	NOTEXISTS=$?
+	# Exit on ssh argument errors, we can't recover from that
+	if [ $NOTEXISTS -eq 255 ]; then
+		exit 255
+	fi
+else
+	echo Checking reachablity: timeout is 8 seconds
+	OUT=`vagrant ssh -c "echo pong" -- -o "ControlPath=$CCP" -o ConnectTimeout=8 -o ServerAliveInterval=600`
+	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
+	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
+	echo Answer: $OUT
+	if [ "pong" != "$OUT" ]; then
+		echo Host not reachable: creating new connection
+		rm "$CCP"
+		vagrant ssh -- -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600
+	fi
 fi
 rsync -M--include="nothing" . > /dev/null 2> /dev/null
 RMUXCHECK=$?
