@@ -18,7 +18,7 @@ if [ ! -e $CCP ]; then
 	fi
 else
 	echo Checking reachablity: timeout is 3 seconds
-	OUT=`timeout --foreground 3 vagrant ssh -c "echo pong" -- -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600`
+	OUT=`ptimeout 3 vagrant ssh -c "echo pong" -- -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600`
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
 	echo Answer: $OUT
