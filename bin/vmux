@@ -24,7 +24,7 @@ else
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
 	if [ "pong" != "$OUT" ]; then
-		echo Host not reachable: creating new connection
+		#echo Connection dead: creating new connection
 		rm "$CCP"
 		vagrant ssh -- -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600
 		CREATED=1
