@@ -38,7 +38,7 @@ fi
 if [ "$TMUX" == "" ]; then
 	echo "Commands:  rxsu     root privileges"
 	if [ -e "$RMUXDIR/tmux.conf" ]; then
-		echo "           tmuk     attach session 0"
+		echo "           tmuk     attach last session"
 		echo "           tmuc N   attach session N"
 		echo tmux sessions:
 		tmux ls 2> /dev/null
