@@ -34,7 +34,7 @@ if [ ! -e $CCP ]; then
 	fi
 else
 	echo Checking reachablity: timeout is 3 seconds
-	OUT=`ssh -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600 "$HOST" echo pong`
+	OUT=`timeout --foreground 3 ssh -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600 "$HOST" echo pong`
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
 	echo Answer: $OUT
