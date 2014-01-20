@@ -22,6 +22,7 @@ for (( argn=1; argn<=argc; argn++)); do
 		break
     fi
 done
+CREATED=0
 NOTEXISTS=0
 CCP="$RMUXDIR/cm/${HOST}-${PORT}.conn"
 if [ ! -e $CCP ]; then
@@ -32,41 +33,45 @@ if [ ! -e $CCP ]; then
 	if [ $NOTEXISTS -eq 255 ]; then
 		exit 255
 	fi
+	CREATED=1
 else
 	echo Checking reachablity: timeout is 3 seconds
 	OUT=`ptimeout 3 ssh -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600 "$HOST" echo pong`
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
-	echo Answer: $OUT
 	if [ "pong" != "$OUT" ]; then
 		echo Host not reachable: creating new connection
 		rm "$CCP"
 		ssh -C -NfM -o "ControlPath=$CCP" -o ServerAliveInterval=600 "$HOST"
+		CREATED=1
 	fi
 fi
-rsync -M--include="nothing" . > /dev/null 2> /dev/null
-RMUXCHECK=$?
-if [ $RMUXCHECK -eq 0 ]; then
-	echo Using advanced rsync features
-	rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
-			--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
-			--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
-			-M--include="__pycache__" -M--include="*.pyc" --exclude=".git/" --rsh="ssh -p$PORT" \
-			-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
-			"$HOST":".rmux-$RMUXID/" > /dev/null &
-	PID=$!
-else
-	rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
-			--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
-			--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
-			--exclude=".git/" --rsh="ssh -p$PORT" \
-			-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
-			"$HOST":".rmux-$RMUXID/" > /dev/null &
-	PID=$!
-fi
-if [ $NOTEXISTS -ne 0 ]; then
-	echo "Initializing"
-	wait $PID
+
+if [ $CREATED -eq 1 ]; then
+	rsync -M--include="nothing" . > /dev/null 2> /dev/null
+	RMUXCHECK=$?
+	if [ $RMUXCHECK -eq 0 ]; then
+		echo Using advanced rsync features
+		rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
+				--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
+				--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
+				-M--include="__pycache__" -M--include="*.pyc" --exclude=".git/" --rsh="ssh -p$PORT" \
+				-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
+				"$HOST":".rmux-$RMUXID/" > /dev/null &
+		PID=$!
+	else
+		rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
+				--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
+				--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
+				--exclude=".git/" --rsh="ssh -p$PORT" \
+				-e"ssh -o \"ControlPath=$CCP\"" "$HOME/.rmux-$RMUXID/" \
+				"$HOST":".rmux-$RMUXID/" > /dev/null &
+		PID=$!
+	fi
+	if [ $NOTEXISTS -ne 0 ]; then
+		echo "Initializing"
+		wait $PID
+	fi
 fi
 export LANGUAGE=$LANG
 ssh "$@" -o "ControlPath=$CCP" -t -o SendEnv='LANG LC_* LANGUAGE' "$HOST" "bash --rcfile \"\$HOME/.rmux-$RMUXID/init\" -i"
