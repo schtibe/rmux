@@ -19,7 +19,7 @@ if [ ! -e $CCP ]; then
 	fi
 	CREATED=1
 else
-	echo Checking connection: timeout is 3 seconds
+	#echo Checking connection: timeout is 3 seconds
 	OUT=`ptimeout 3 vagrant ssh -c "echo pong" -- -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600`
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
