@@ -19,7 +19,7 @@ if [ ! -e $CCP ]; then
 	fi
 	CREATED=1
 else
-	echo Checking reachablity: timeout is 3 seconds
+	echo Checking connection: timeout is 3 seconds
 	OUT=`ptimeout 3 vagrant ssh -c "echo pong" -- -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600`
 	OUT="${OUT#"${OUT%%[![:space:]]*}"}"   # remove leading whitespace characters
 	OUT="${OUT%"${OUT##*[![:space:]]}"}"   # remove trailing whitespace characters
@@ -34,7 +34,6 @@ rsync -M--include="nothing" . > /dev/null 2> /dev/null
 RMUXCHECK=$?
 if [ $CREATED -eq 1 ]; then
 	if [ $RMUXCHECK -eq 0 ]; then
-		echo Using advanced rsync features
 		rsync -L -r --force --delete --exclude=/tmux-bin --exclude=/.vim/spell --exclude=.git \
 				--exclude=/bash_history --exclude=/my_history --exclude=/tmux-detach-hook \
 				--exclude=/tmux-attach-hook --exclude="__pycache__" --exclude="*.pyc" \
