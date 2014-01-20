@@ -33,8 +33,8 @@ if [ ! -e $CCP ]; then
 		exit 255
 	fi
 else
-	echo Checking reachablity: timeout is 8 seconds
-	OUT=`ssh -o "ControlPath=$CCP" -o ConnectTimeout=8 -o ServerAliveInterval=600 "$HOST" echo pong`
+	echo Checking reachablity: timeout is 3 seconds
+	OUT=`ssh -o "ControlPath=$CCP" -o ConnectTimeout=3 -o ServerAliveInterval=600 "$HOST" echo pong`
 	echo Answer: $OUT
 	if [ "pong" != "$OUT" ]; then
 		echo Host not reachable: creating new connection
