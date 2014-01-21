@@ -5,9 +5,12 @@ takes config-location as argument or from a environment variable.
 
 Minimal dependencies are:
 
-* ssh
-* bash
-* rsync
+* Local/Remote:
+  * ssh
+  * bash
+  * rsync
+* Only local:
+  * python
 
 It assumes that you connect to some kind of unix. The default templates are built for:
 
